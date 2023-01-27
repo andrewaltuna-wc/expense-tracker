@@ -1,8 +1,8 @@
 import 'package:expense_tracker/tracker/cubit/input_cubit.dart';
 import 'package:expense_tracker/tracker/cubit/transaction_cubit.dart';
 import 'package:expense_tracker/tracker/models/transaction.dart';
-import 'package:expense_tracker/widgets/balance_widget.dart';
-import 'package:expense_tracker/widgets/transaction_list_item.dart';
+import 'package:expense_tracker/tracker/widgets/balance_widget.dart';
+import 'package:expense_tracker/tracker/widgets/transaction_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
