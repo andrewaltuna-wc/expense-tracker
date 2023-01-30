@@ -17,7 +17,7 @@ class TransactionState extends Equatable with DoubleFormatter {
     );
   }
 
-  String getTotal(TotalType type) {
+  double getTotal(TotalType type) {
     double amount = 0.0;
     for (Transaction trans in transactions) {
       switch (type) {
@@ -36,14 +36,9 @@ class TransactionState extends Equatable with DoubleFormatter {
           break;
       }
     }
-    return formatDouble(amount);
+    return amount;
   }
 
   @override
   List<Object?> get props => [transactions];
-
-  // String formatDouble(double value) {
-  //   return value.toString().replaceAllMapped(
-  //       RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
-  // }
 }

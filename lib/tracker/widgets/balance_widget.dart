@@ -1,14 +1,15 @@
+import 'package:expense_tracker/tracker/widgets/animated_counter_widget.dart';
 import 'package:flutter/material.dart';
 
 class BalanceWidget extends StatelessWidget {
   const BalanceWidget({
+    super.key,
     required this.balance,
     required this.income,
     required this.expense,
-    super.key,
   });
 
-  final String balance, income, expense;
+  final double balance, income, expense;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,9 @@ class BalanceWidget extends StatelessWidget {
         child: Column(
           children: [
             const Text('TOTAL BALANCE'),
-            Text(
-              '₱ $balance',
-              style: const TextStyle(
+            AnimatedCount(
+              count: balance,
+              textStyle: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w700,
               ),
@@ -43,7 +44,7 @@ class BalanceWidget extends StatelessWidget {
     );
   }
 
-  Widget incomeWidget(String value) {
+  Widget incomeWidget(double value) {
     return Row(
       children: [
         const Icon(
@@ -60,9 +61,9 @@ class BalanceWidget extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            Text(
-              '₱ $value',
-              style: const TextStyle(
+            AnimatedCount(
+              count: value,
+              textStyle: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
                 color: Colors.green,
@@ -74,7 +75,7 @@ class BalanceWidget extends StatelessWidget {
     );
   }
 
-  Widget expenseWidget(String value) {
+  Widget expenseWidget(double value) {
     return Row(
       children: [
         Column(
@@ -86,9 +87,9 @@ class BalanceWidget extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            Text(
-              '₱ $value',
-              style: const TextStyle(
+            AnimatedCount(
+              count: value,
+              textStyle: const TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w700,
                 color: Colors.red,

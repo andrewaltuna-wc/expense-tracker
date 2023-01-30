@@ -1,7 +1,8 @@
+import 'package:expense_tracker/tracker/mixins/double_formatter.dart';
 import 'package:expense_tracker/tracker/models/transaction.dart';
 import 'package:flutter/material.dart';
 
-class TransactionListItem extends StatelessWidget {
+class TransactionListItem extends StatelessWidget with DoubleFormatter {
   const TransactionListItem(
       {required this.transaction, required this.function, super.key});
 
@@ -33,7 +34,7 @@ class TransactionListItem extends StatelessWidget {
                     Text(transaction.name),
                     Row(
                       children: [
-                        Text('₱ ${transaction.amount}'),
+                        Text('₱ ${formatDouble(transaction.amount)}'),
                         const SizedBox(width: 10.0),
                         SizedBox(
                           height: 20,
