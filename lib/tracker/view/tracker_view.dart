@@ -31,16 +31,16 @@ class TrackerView extends StatelessWidget {
               mainHeaderWidget(),
               const SizedBox(height: 15.0),
               BalanceWidget(
-                balance: transactionCubit.state.getTotal(TotalType.balance),
-                income: transactionCubit.state.getTotal(TotalType.income),
-                expense: transactionCubit.state.getTotal(TotalType.expense),
+                balance: state.balance,
+                income: state.income,
+                expense: state.expense,
               ),
               const SizedBox(height: 15.0),
               ...historyHeaderWidget(),
               const SizedBox(height: 10.0),
               Expanded(child: transactionsWidget(state.transactions)),
               const SizedBox(height: 15.0),
-              addTransactionHeaderWidget(),
+              ...addTransactionHeaderWidget(),
               inputWidget(),
             ],
           ),
@@ -72,14 +72,17 @@ class TrackerView extends StatelessWidget {
     ];
   }
 
-  Widget addTransactionHeaderWidget() {
-    return const Text(
-      'Add a Transaction',
-      style: TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w700,
+  List<Widget> addTransactionHeaderWidget() {
+    return [
+      const Text(
+        'Add a Transaction',
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+        ),
       ),
-    );
+      const Divider(thickness: 1.0),
+    ];
   }
 
   Widget inputWidget() {
@@ -87,7 +90,6 @@ class TrackerView extends StatelessWidget {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Divider(thickness: 1.0),
           Row(
             children: [
               Flexible(
@@ -119,7 +121,7 @@ class TrackerView extends StatelessWidget {
                         ? null
                         : 'Invalid amount',
                   ),
-                  onChanged: context.read<InputCubit>().amountChanged,
+                  onChanged: inputCubit.amountChanged,
                 ),
               ),
             ],

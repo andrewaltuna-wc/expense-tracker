@@ -9,17 +9,37 @@ class TransactionCubit extends Cubit<TransactionState> {
   TransactionCubit() : super(const TransactionState());
 
   void addTransaction(Transaction transaction) {
-    emit(state.copyWith(
-      transactions: [...state.transactions, transaction],
-    ));
+    List<Transaction> transactions = [...state.transactions, transaction];
+
+    emitChanges(transactions);
   }
 
   void removeTransaction(int index) {
-    List<Transaction> newList = [...state.transactions];
-    newList.removeAt(index);
+    List<Transaction> transactions = [...state.transactions]..removeAt(index);
+
+    emitChanges(transactions);
+  }
+
+  void emitChanges(List<Transaction> transactions) {
+    double balance = 0;
+    double income = 0;
+    double expense = 0;
+
+    for (Transaction trans in transactions) {
+      double amount = trans.amount;
+      balance += amount;
+      if (amount >= 0) {
+        income += amount;
+      } else {
+        expense += amount;
+      }
+    }
 
     emit(state.copyWith(
-      transactions: newList,
+      transactions: transactions,
+      balance: balance,
+      income: income,
+      expense: expense,
     ));
   }
 }

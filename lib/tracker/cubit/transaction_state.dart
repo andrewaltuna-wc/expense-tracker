@@ -5,38 +5,26 @@ enum TotalType { balance, income, expense }
 class TransactionState extends Equatable with DoubleFormatter {
   const TransactionState({
     this.transactions = const <Transaction>[],
+    this.balance = 0.0,
+    this.income = 0.0,
+    this.expense = 0.0,
   });
 
   final List<Transaction> transactions;
+  final double balance, income, expense;
 
   TransactionState copyWith({
     List<Transaction>? transactions,
+    double? balance,
+    double? income,
+    double? expense,
   }) {
     return TransactionState(
       transactions: transactions ?? this.transactions,
+      balance: balance ?? this.balance,
+      income: income ?? this.income,
+      expense: expense ?? this.expense,
     );
-  }
-
-  double getTotal(TotalType type) {
-    double amount = 0.0;
-    for (Transaction trans in transactions) {
-      switch (type) {
-        case TotalType.balance:
-          amount += trans.amount;
-          break;
-        case TotalType.income:
-          if (trans.amount > 0) {
-            amount += trans.amount;
-          }
-          break;
-        case TotalType.expense:
-          if (trans.amount < 0) {
-            amount += trans.amount;
-          }
-          break;
-      }
-    }
-    return amount;
   }
 
   @override
